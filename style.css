@@ -1,0 +1,351 @@
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --bg-color: #fff0f3;
+    --text-color: #590d22;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Dancing Script', cursive;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Landing Screen */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: opacity 1s ease-in-out;
+}
+
+.screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+    /* Hide from layout */
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+}
+
+#landing {
+    background: linear-gradient(135deg, #fff0f3 0%, #ffccd5 100%);
+}
+
+#landing h1 {
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+}
+
+.pulse-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+    animation: pulse 1.5s infinite;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Main Content */
+#main-content {
+    /* For main content, we might not want absolute positioning if it scrolls */
+    position: relative;
+    display: none;
+    /* Controlled by JS */
+    padding: 20px;
+    background-color: var(--bg-color);
+}
+
+#main-content.active {
+    display: block;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+header h2 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.text-red {
+    color: red;
+}
+
+/* Letter Section */
+.letter-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.envelope {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    border: 2px solid var(--secondary-color);
+}
+
+.envelope-front {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stamp {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.recipient {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.letter-content {
+    line-height: 1.8;
+}
+
+.letter-content h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.signature {
+    margin-top: 20px;
+    text-align: right;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* Gallery Section */
+.gallery-section h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    padding: 10px;
+}
+
+.gallery-item {
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+.gallery-item:hover {
+    transform: translateY(-5px);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+footer {
+    text-align: center;
+    margin-top: 50px;
+    padding: 20px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    font-family: 'Dancing Script', cursive;
+}
+
+/* 3D Floating Hearts Animation */
+.heart-container {
+    position: fixed;
+    top: 110vh;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    perspective: 1000px;
+}
+
+.heart-3d {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    transform: rotate(45deg);
+    animation: floatUp 4s linear forwards, heartBeat 1s infinite;
+    box-shadow: 0 0 10px rgba(255, 77, 109, 0.5);
+}
+
+.heart-3d::before,
+.heart-3d::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: 50%;
+    box-shadow: inherit;
+}
+
+.heart-3d::before {
+    left: -50%;
+}
+
+.heart-3d::after {
+    top: -50%;
+}
+
+@keyframes floatUp {
+    0% {
+        top: 110vh;
+        opacity: 1;
+        transform: rotate(45deg) translateZ(0) scale(0.5);
+    }
+
+    100% {
+        top: -10vh;
+        opacity: 0;
+        transform: rotate(45deg) translateZ(200px) scale(1.5);
+    }
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    15% {
+        transform: rotate(45deg) scale(1.2);
+    }
+
+    30% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    45% {
+        transform: rotate(45deg) scale(1.1);
+    }
+
+    60% {
+        transform: rotate(45deg) scale(1);
+    }
+
+    100% {
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+    #landing h1 {
+        font-size: 2.2rem;
+        /* Adjusted for smaller screens */
+    }
+
+    .pulse-btn {
+        padding: 12px 25px;
+        font-size: 1.1rem;
+        -webkit-tap-highlight-color: transparent;
+        /* Remove highlight on tap */
+    }
+
+    .envelope {
+        padding: 20px;
+    }
+
+    .letter-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .gallery-item {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        /* Lighter shadow for mobile performance */
+    }
+}
